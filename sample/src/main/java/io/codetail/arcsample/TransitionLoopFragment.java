@@ -1,6 +1,7 @@
 package io.codetail.arcsample;
 
 import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +16,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
-import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.animation.arcanimator.ArcAnimator;
 import io.codetail.animation.arcanimator.Side;
@@ -88,13 +88,13 @@ public class TransitionLoopFragment extends Fragment {
 
         float finalRadius = Math.max(mBluePair.getWidth(), mBluePair.getHeight()) * 1.5f;
 
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(mBluePair, endBlueX, endBlueY, mBlue.getWidth() / 2f,
+        Animator animator = ViewAnimationUtils.createCircularReveal(mBluePair, endBlueX, endBlueY, mBlue.getWidth() / 2f,
                 finalRadius);
         animator.setDuration(500);
         animator.setInterpolator(ACCELERATE);
         animator.addListener(new SimpleListener() {
             @Override
-            public void onAnimationEnd() {
+            public void onAnimationEnd(Animator animation) {
                 raise();
             }
         });
@@ -120,10 +120,10 @@ public class TransitionLoopFragment extends Fragment {
         int cx = mRed.getWidth() / 2;
         int cy = mRed.getHeight() / 2;
 
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(mRed, cx, cy, 0, mRed.getWidth() / 2);
+        Animator animator = ViewAnimationUtils.createCircularReveal(mRed, cx, cy, 0, mRed.getWidth() / 2);
         animator.addListener(new SimpleListener() {
             @Override
-            public void onAnimationEnd() {
+            public void onAnimationEnd(Animator animation) {
                 upRed();
             }
         });
@@ -152,10 +152,10 @@ public class TransitionLoopFragment extends Fragment {
         int cx = mRed.getWidth() / 2;
         int cy = mRed.getHeight() / 2;
 
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(mRed, cx, cy, mRed.getWidth() / 2, 0);
+        Animator animator = ViewAnimationUtils.createCircularReveal(mRed, cx, cy, mRed.getWidth() / 2, 0);
         animator.addListener(new SimpleListener() {
             @Override
-            public void onAnimationEnd() {
+            public void onAnimationEnd(Animator animation) {
                 mRed.setVisibility(View.INVISIBLE);
                 mRed.setX(startRedX);
                 mRed.setY(startRedY);
@@ -181,12 +181,12 @@ public class TransitionLoopFragment extends Fragment {
     void disappearBluePair() {
         float finalRadius = Math.max(mBluePair.getWidth(), mBluePair.getHeight()) * 1.5f;
 
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(mBluePair, endBlueX, endBlueY,
+        Animator animator = ViewAnimationUtils.createCircularReveal(mBluePair, endBlueX, endBlueY,
                 finalRadius, mBlue.getWidth() / 2f);
         animator.setDuration(500);
         animator.addListener(new SimpleListener() {
             @Override
-            public void onAnimationEnd() {
+            public void onAnimationEnd(Animator animation) {
                 mBluePair.setVisibility(View.INVISIBLE);
                 returnBlue();
             }
@@ -210,27 +210,7 @@ public class TransitionLoopFragment extends Fragment {
     }
 
 
-    private static class SimpleListener implements SupportAnimator.AnimatorListener, ObjectAnimator.AnimatorListener {
-
-        @Override
-        public void onAnimationStart() {
-
-        }
-
-        @Override
-        public void onAnimationEnd() {
-
-        }
-
-        @Override
-        public void onAnimationCancel() {
-
-        }
-
-        @Override
-        public void onAnimationRepeat() {
-
-        }
+    private static class SimpleListener implements AnimatorListener {
 
         @Override
         public void onAnimationStart(Animator animation) {
