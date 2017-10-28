@@ -1,4 +1,6 @@
 # ArcAnimator
+
+### PS: 修改此库是因为原作者虽然代码上去掉 NineOldAndroids，但还没有升级原有的 maven repository，等原作者升级后会删除此库。
 ArcAnimator helps to create arc transition animation: 14+
 
 <img width="270" height="480" src="http://i.imgur.com/DSiQxbg.gif" />|<img width="270" height="480" src="http://i.imgur.com/aLcLrGk.gif" />
@@ -14,18 +16,18 @@ Usage
 ===
 Add the library to your project:
 ```groovy
-  compile 'com.github.asyl.animation:arcanimator:1.0.0'
+    compile 'com.github.fbsum:ArcAnimator:1.0.2'
 ```
 
 Then use it in your project code:
 ```java
-  //set up clipView and coordinates where clipView will move
-  ArcAnimator.createArcAnimator(clipView, endX, endY, DEGREE, SIDE)
+    //set up clipView and coordinates where clipView will move
+    ArcAnimator.createArcAnimator(clipView, endX, endY, DEGREE, SIDE)
                     .setDuration(500)
                     .start();
   
-  //or specify nestView for clipView. Animator will take center x,y coordinates of nestView
-  ArcAnimator.createArcAnimator(clipView, nestView, DEGREE, SIDE)
+    //or specify nestView for clipView. Animator will take center x,y coordinates of nestView
+    ArcAnimator.createArcAnimator(clipView, nestView, DEGREE, SIDE)
                     .setDuration(500)
                     .start();
 ```
@@ -38,13 +40,13 @@ Download
 To include this library in your project add to your build.gradle:
 
 ```gradle
-	repositories {
-	    maven { url "https://jitpack.io" }
-	}
-	
-	dependencies {
-	    compile 'com.github.asyl:ArcAnimator:v1.0.0'
-	}
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+    
+    dependencies {
+        compile 'com.github.fbsum:ArcAnimator:1.0.2'
+    }
 ```
 
 Dependency
